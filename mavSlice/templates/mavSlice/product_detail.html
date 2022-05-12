@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'mavSlice/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+
+
+{% block content %}
+    <style> body { background-color: beige; } </style>
+  <div class="product-detail">
+    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/No_image_available.png' %}{% endif %}">
+    <h1>{{ product.name }}</h1>
+    <h2><a href="{{ product.get_absolute_url }}">}</a></h2>
+    <p class="price">${{ product.get_price }}</p>
+    <form action="{% url "mavSlice:cart_add" product.product_id %}" method="post">
+      {{ cart_product_form }}
+      {% csrf_token %}
+      <input type="submit" value="Add to cart">
+    </form>
+    {{ product.description|linebreaks }}
+
+  <style>
+      .product-detail{
+            text-align:justify;}
+
+      .product-detail img{
+            width:40%;
+            float:left;
+            padding:0 20px 20px 0;}
+
+      .product-detail h1{
+          margin-bottom:0;
+      }
+
+      .product-detail h2{
+          margin-top:10px;
+      }
+
+      .product-detail .price{
+          color:#333;
+          font-size:28px;
+          font-weight:bold;
+      }
+
+
+  </style>
+  </div>
+{% endblock %}
+</html>
