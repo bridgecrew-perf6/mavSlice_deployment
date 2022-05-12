@@ -3,3 +3,4 @@ django-crispy-forms
 django-mathfilters
 celery
 braintree
+Pillow
